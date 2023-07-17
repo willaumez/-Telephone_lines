@@ -58,6 +58,12 @@
             <version>6.1.1</version>
         </dependency>
 
+        <!-- Security Session -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
