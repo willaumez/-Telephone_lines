@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Authentification</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formLogin" (ngSubmit)="handleLogin()">
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Username/Email" formControlName="username">
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Connexion</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
