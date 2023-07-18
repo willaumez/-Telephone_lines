@@ -8,7 +8,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
 import {AppHttpInterceptor} from "./interceptors/app-http.interceptor";
-import { NotAutorizedComponent } from './not-autorized/not-autorized.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     AppComponent,
     LoginComponent,
     AdminTemplateComponent,
-    NotAutorizedComponent,
     NotAuthorizedComponent
   ],
     imports: [
