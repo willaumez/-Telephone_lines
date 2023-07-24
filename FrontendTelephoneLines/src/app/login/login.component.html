@@ -1,24 +1,49 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-4 col-md-6">
-      <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">Authentification</h4>
-        </div>
-        <div class="card-body">
-          <form [formGroup]="formLogin" (ngSubmit)="handleLogin()">
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Username/Email" formControlName="username">
-            </div>
-            <div class="mb-3">
-              <input type="password" class="form-control" placeholder="Password" formControlName="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Connexion</button>
-          </form>
-        </div>
+<div class="content-body">
+  <mat-card>
+    <mat-card-content>
+      <div class="header">
+        <P>Authentification</P>
       </div>
-    </div>
-  </div>
+      <form (ngSubmit)="handleLogin()" name="loginForm" [formGroup]="formLogin">
+        <div class="emailInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nom ou E-mail</mat-label>
+            <input
+              formControlName="username"
+              matInput
+              placeholder="Entrer le nom ou l'e-mail" required
+            />
+            <mat-error *ngIf="!formLogin.controls['username'].valid">
+              Nom ou E-mail requis
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <span>
+            <a class="text-link aLink" routerLink="/auth/forgot-password">Mot de pass oublié?</a>
+          </span>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Mot de Passe</mat-label>
+            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required/>
+
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>
+                {{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+            </a>
+
+            <mat-error *ngIf="!formLogin.controls['password'].valid">
+              Mot de Passe requis
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-flat-button color="primary">Connexion</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 

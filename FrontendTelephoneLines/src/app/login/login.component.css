@@ -1,35 +1,59 @@
-.login-container {
-  max-width: 400px;
-  margin: 0 auto;
+.content-body {
+  min-height: 100%;
+  padding: 60px 1rem;
+  background-image: url("https://www.companeo.com/ibb/fr_FR/guide/2015/02/standard_tel/ouverture_ligne_telephonique.jpg");
+  background-color: gray;
+  background-size: cover;
+  background-position: center;
+  display: block;
+
+  /* Appliquer l'effet de flou */
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+mat-card {
+  max-width: 600px;
+  margin: 4em auto;
+  text-align: center;
+  max-height: 600px;
+  border-radius: 30px;
+  box-shadow: 10px 10px 10px 20px rgba(0, 47, 255, 0.22);
 }
 
-h2 {
+.header{
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.full-width {
+  width: 80%;
+}
+
+.button-row {
+  padding-top: 5px;
+}
+
+.button-row a {
+  margin-right: 8px;
   text-align: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+.forget-password{
+  padding-left: 0px;
 }
 
-label {
-  margin-bottom: 0.5rem;
+.emailInput{
+  padding-top: 10px;
 }
 
-input {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+.contentBody {
+  padding: 60px 1rem;
+  background :#1b6ca8;
+  display: block;
 }
 
-button {
-  padding: 0.5rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.error-message {
-  color: red;
-  margin-top: 0.5rem;
+.aLink{
+  float: right;
+  padding-right: 60px;
+  text-decoration: none;
 }
