@@ -3,7 +3,7 @@ package com.telephone.backendtelephonelines.web;
 
 import com.telephone.backendtelephonelines.entities.User;
 import com.telephone.backendtelephonelines.exceptions.UserNotFoundException;
-import com.telephone.backendtelephonelines.services.UserServices;
+import com.telephone.backendtelephonelines.services.LigneTelephoniqueService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.List;
 @Slf4j
 @CrossOrigin("*")
 public class UserRestController {
-    private UserServices userServices;
+    private LigneTelephoniqueService userServices;
 
     @GetMapping("/users")
-    public List<User> customers() {
+    public List<User> getUsers() {
         return userServices.listUsers();
     }
 

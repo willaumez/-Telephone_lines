@@ -51,7 +51,7 @@ public class SecurityConfig {
             return User.builder()
                     .username(user.getUsername())
                     .password(user.getPassword())
-                    .authorities("ADMIN")
+                    .authorities(String.valueOf(user.getRole()))
                     .build();
         };
     }

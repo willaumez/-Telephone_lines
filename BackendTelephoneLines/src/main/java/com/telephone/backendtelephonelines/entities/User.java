@@ -1,9 +1,12 @@
 package com.telephone.backendtelephonelines.entities;
 
+import com.telephone.backendtelephonelines.enums.RoleType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +25,9 @@ public class User {
     private String email;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
 }
 
 
