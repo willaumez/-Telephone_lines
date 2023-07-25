@@ -55,7 +55,6 @@
 }
 
 .sidenav-collapsed {
-  //width: 5rem;
   width: 16.5625rem;
 }
 
@@ -113,6 +112,62 @@
   }
 
 }
+
+.sidenav-nav-bottom {
+  list-style: none;
+  display: flex;
+  padding: 0.938rem;
+  margin-top: auto;
+  margin-bottom: 2.8rem;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  .divider-custom {
+    height: 5px;
+    background-color: #fff;
+    margin: 1rem 0;
+  }
+
+  .sidenav-nav-item {
+    width: 100%;
+    margin-bottom: 0.625rem;
+
+    .sidenav-nav-link {
+      display: flex;
+      align-items: center;
+      height: 3rem;
+      color: #f3f3f3;
+      text-decoration: none;
+      border-radius: 0.625rem;
+      transition: color .3s ease;
+
+      .sidenav-link-icon {
+        font-size: 25px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: .5rem;
+        text-align: center;
+      }
+
+      .sidenav-link-text {
+        margin-left: 1.5rem;
+        font-size: 18px;
+      }
+    }
+
+    .sidenav-nav-link:hover {
+      background-color: #fff;
+      color: #000;
+
+      .menu-collapse-icon{
+        color: #000;
+      }
+    }
+  }
+
+}
+
 
 
 .active {
@@ -178,20 +233,19 @@
 }
 
 
-.bottom-elements{
-  margin-bottom: 10px;
-}
-
 
 //Scrollbar and visibility on hover and focus
 
 .scrollwrap{
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   visibility: hidden;
   height: calc(100% - 3.65rem);
 }
 
 .sidenav-nav,
+.sidenav-nav-bottom,
 .scrollwrap:hover,
 .scrollwrap:focus{
   visibility: visible;

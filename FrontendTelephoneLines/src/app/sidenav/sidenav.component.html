@@ -17,7 +17,7 @@
            *ngIf="data.items && data.items.length > 0"
            [ngClass]="getActiveClass(data)"
         >
-          <i class="sidenav-link-icon" [class] = "data.icon"></i>
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
           <i *ngIf="data.items && collapsed" class="menu-collapse-icon"
              [ngClass]="!data.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"
@@ -28,10 +28,10 @@
            routerLinkActive="active"
            [routerLinkActiveOptions]="{exact: true}"
         >
-          <i class="sidenav-link-icon" [class] = "data.icon"></i>
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
           <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
         </a>
-        <div *ngIf="collapsed && data.items && data.items.length > 0" >
+        <div *ngIf="collapsed && data.items && data.items.length > 0">
           <app-sub-level-menu
             [data]="data"
             [collapsed]="collapsed"
@@ -40,27 +40,31 @@
           ></app-sub-level-menu>
         </div>
       </li>
+    </ul>
 
-      <div class="divider"></div>
-      <mat-divider class="divider-custom"></mat-divider>
-
-      <!--<li class="sidenav-nav-item" *ngFor="let data of navData2">
-        <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+    <ul class="sidenav-nav-bottom">
+      <li class="sidenav-nav-item" style="margin-bottom: 3rem">
+        <a class="sidenav-nav-link" routerLink="utilisateurs"
            routerLinkActive="active"
            [routerLinkActiveOptions]="{exact: true}"
         >
-          <i class="sidenav-link-icon" [class] = "data.icon"></i>
-          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
+          <i class="sidenav-link-icon fas fa-users"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Utilisateurs</span>
         </a>
-      </li>-->
+      </li>
 
-      <div class="divider">
-
-      </div>
-    </ul>
-    <ul class="sidenav-nav bottom-elements ">
       <li class="sidenav-nav-item">
-        <a class="sidenav-nav-link" routerLink="logout"
+        <a class="sidenav-nav-link" routerLink="profile"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}"
+        >
+          <i class="sidenav-link-icon fas fa-user"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Profile</span>
+        </a>
+      </li>
+
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link"
            routerLinkActive="active"
            [routerLinkActiveOptions]="{exact: true}"
            (click)="handleLogOut()"
@@ -70,5 +74,6 @@
         </a>
       </li>
     </ul>
+    <!--    <div class="divider"></div>-->
   </div>
 </div>

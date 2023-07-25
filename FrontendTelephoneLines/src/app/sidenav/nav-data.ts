@@ -47,17 +47,7 @@ const navbarData2 = [
     routeLink: 'users',
     icon: 'fas fa-users',
     label: 'Utilisateurs'
-  },
-  {
-    routeLink: 'profile',
-    icon: 'fas fa-user',
-    label: 'Profile'
-  },
-  {
-    routeLink: 'logout',
-    icon: 'fas fa-sign-out-alt',
-    label: 'Deconnexion'
-  },
+  }
 ];
 
 
