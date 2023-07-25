@@ -23,7 +23,7 @@ public class LigneTelephoniqueRestAPI {
     }
 
     @GetMapping("/lignes/{ligneId}")
-    public LigneTelephoniqueDTO getBankAccount(@PathVariable Long ligneId) throws LigneTelephoniqueNotFoundException {
+    public LigneTelephoniqueDTO getLigneTelephoniqueById(@PathVariable Long ligneId) throws LigneTelephoniqueNotFoundException {
         return ligneTelephoniqueService.getLigneTelephonique(ligneId);
     }
 

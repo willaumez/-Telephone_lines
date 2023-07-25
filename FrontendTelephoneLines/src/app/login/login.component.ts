@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit{
     let password = this.formLogin.value.password;
 
     if (username && password){
-      this.loginService.login(username, password).subscribe({
+       this.loginService.login(username, password).subscribe({
         next: data => {
           this.loginService.loadProfile(data);
           this.router.navigateByUrl("/admin");
@@ -51,6 +51,21 @@ export class LoginComponent implements OnInit{
       })
     }
   }
+
+/*  async handleLogin() {
+    let username = this.formLogin.value.username;
+    let password = this.formLogin.value.password;
+
+    if (username && password) {
+      try {
+        const data = await this.loginService.login(username, password).toPromise();
+        this.loginService.loadProfile(data);
+        this.router.navigateByUrl("/admin");
+      } catch (err) {
+        console.log("Error: ", err);
+      }
+    }
+  }*/
 
 }
 

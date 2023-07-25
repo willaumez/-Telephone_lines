@@ -4,7 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import {AdminTemplateComponent} from "./admin-template/admin-template.component";
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
-import {LigneTelComponent} from "./ligne-tel/ligne-tel.component";
+import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
 
 const routes: Routes = [
 
@@ -15,7 +15,7 @@ const routes: Routes = [
       component: AdminTemplateComponent,
       canActivate: [AuthenticationGuard],
       children: [
-        {path: 'list', component: LigneTelComponent},
+        {path: 'list', component: LigneTelephoniqueComponent},
         {path: '', redirectTo: 'list', pathMatch: 'full'}, // Redirect to 'list' when accessing '/admin'
         {
           path: 'types',

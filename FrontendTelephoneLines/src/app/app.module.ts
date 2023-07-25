@@ -17,10 +17,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatTableModule} from '@angular/material/table';
+
+
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {BodyComponent} from './body/body.component';
-import {LigneTelComponent} from './ligne-tel/ligne-tel.component';
-import { SubLevelMenuComponent } from './sidenav/sub-level-menu.component';
+import {SubLevelMenuComponent} from './sidenav/sub-level-menu.component';
+import {LigneTelephoniqueComponent} from './ligne-telephonique/ligne-telephonique.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -30,8 +35,8 @@ import { SubLevelMenuComponent } from './sidenav/sub-level-menu.component';
     NotAuthorizedComponent,
     SidenavComponent,
     BodyComponent,
-    LigneTelComponent,
     SubLevelMenuComponent,
+    LigneTelephoniqueComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,10 @@ import { SubLevelMenuComponent } from './sidenav/sub-level-menu.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}
