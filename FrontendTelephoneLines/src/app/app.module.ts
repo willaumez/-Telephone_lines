@@ -26,6 +26,9 @@ import {SubLevelMenuComponent} from './sidenav/sub-level-menu.component';
 import {LigneTelephoniqueComponent} from './ligne-telephonique/ligne-telephonique.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import {MatSortModule} from "@angular/material/sort";
     MatDividerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

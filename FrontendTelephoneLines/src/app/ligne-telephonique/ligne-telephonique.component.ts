@@ -1,12 +1,10 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
-import {catchError, Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {LigneTelephoniqueDTO} from "../Models/LigneTelephoniqueDTO";
 import {LigneTelephoniqueService} from "../services/ligne-telephonique.service";
 
@@ -15,11 +13,12 @@ import {LigneTelephoniqueService} from "../services/ligne-telephonique.service";
   templateUrl: './ligne-telephonique.component.html',
   styleUrls: ['./ligne-telephonique.component.scss']
 })
+
 export class LigneTelephoniqueComponent implements OnInit {
   displayedColumns: string[] = [
     'id', 'type', 'numeroLigne', 'affectation', 'poste', 'etat', 'dateLivraison',
-    'numeroSerie', 'montant', 'VPN', 'fonction', 'forfait', 'codePIN', 'codePUK',
-    'Ip', 'categorie', 'debit'];
+    'numeroSerie', 'montant', 'fonction', 'forfait', 'codePIN', 'codePUK',
+    'Ip', 'categorie', 'debit', 'ACTIONS'];
 
   dataSource!: MatTableDataSource<any>;
 
@@ -58,6 +57,26 @@ export class LigneTelephoniqueComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  formatNumeroLigne(numeroLigne: string): string {
+    if (!numeroLigne) return '---';
+
+    // Eliminar espacios en blanco y guiones si existen
+    const cleanedNumber = numeroLigne.replace(/[\s-]/g, '');
+
+    // Si el número tiene la forma "0696647847"
+    if (cleanedNumber.length === 10) {
+      return cleanedNumber.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+    }
+    // Si el número tiene la forma "212696647847"
+    else if (cleanedNumber.length === 12) {
+      return cleanedNumber.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1-$2-$3-$4');
+    }
+
+    // Si no coincide con ninguno de los formatos esperados, devolver el número original
+    return numeroLigne;
+  }
+
 
   /*getListLignes(){
     this.lignesTel$ = this.ligneService.getLignesTelephoniques().pipe(

@@ -1,28 +1,119 @@
+.main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  mat-form-field {
+    width: 100%;
+  }
+}
 
+
+/* CSS pour les cellules du tableau */
+.mat-cell {
+  white-space: nowrap;
+  table-layout: initial;
+
+}
 table {
-  width: auto;
   padding: 10px;
+  text-align: center;
+  align-content: center;
 }
 
 .mat-mdc-form-field {
   font-size: 14px;
-  width: 100%;
+  width: 40%;
 }
+
 
 td, th {
-  width: 25%;
+  width: auto;
+  height: auto;
+  text-align: center;
+  align-content: center;
+  align-items: center;
 }
+th{
+  font-size: 1rem;
+}
+/*
+.action-container{
+  display: inline-block;
+  justify-content: space-between;
+  align-items: center; // Centrer les boutons verticalement dans la cellule
+  width: 100%;
+}
+*/
 
-.mat-mdc-row .mat-mdc-cell {
+
+/*.mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
+}*/
+
+@keyframes loopEffect {
+  0%, 100% {
+    border-color: currentColor;
+    background-color: #f4f7fa;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #030303;
+  }
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
+  background-color: #dcdcde;
+  //font-size: 1rem;
+  font-weight: bold;
+ // color: #030303;
+  //animation: loopEffect 1s infinite;
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+.mat-mdc-row:hover{
+  border-top: 2px solid #263238;
+  border-bottom: 2px solid #263238;
+  font-size: 10px;
 }
 
 .demo-row-is-clicked {
   font-weight: bold;
 }
+
+
+
+
+mat-paginator{
+  border-radius: 1rem;
+  float: right;
+  margin-top: 1rem;
+  display: inline-block;
+  border: 2px solid #263238;
+  font-size: 1rem;
+}
+
+.mat-elevation-z8 {
+  overflow-x: auto;
+}
+
+.mat-form-field,
+.mat-paginator {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  table.mat-table {
+    font-size: 12px;
+  }
+
+  th.mat-header-cell,
+  td.mat-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
