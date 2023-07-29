@@ -45,13 +45,13 @@ export interface LigneTelephoniqueDTO{
   etat: EtatType;
   dateLivraison: Date;
   numeroSerie: string;
-  montant: string;
+  montant: number;
+  adresseIp?: string;
   VPN?: boolean;
   fonction?: string;
   forfait?: ForfaitInternet | ForfaitGSM;
   codePIN?: string;
   codePUK?: string;
-  Ip?: string;
   categorie?: Categorie;
   debit?: DebitType;
 }

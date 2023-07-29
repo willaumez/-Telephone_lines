@@ -1,6 +1,7 @@
 package com.telephone.backendtelephonelines.services;
 
 import com.telephone.backendtelephonelines.dtos.*;
+import com.telephone.backendtelephonelines.entities.InternetMobile;
 import com.telephone.backendtelephonelines.entities.User;
 import com.telephone.backendtelephonelines.exceptions.LigneTelephoniqueNotFoundException;
 import com.telephone.backendtelephonelines.exceptions.UserNotFoundException;
@@ -30,5 +31,15 @@ public interface LigneTelephoniqueService {
 
     List<LigneTelephoniqueDTO> searchLigneTelephonique(String keyword);
 
+    void deleteLigneTelephonique(Long id);
+
+    //update
+    InternetMobileVPNDTO updateInternetMobileVPN(InternetMobileVPNDTO internetMobileVPNDTO);
+
+    InternetMobileDTO updateInternetMobile(InternetMobileDTO internetMobileDTO);
+
+    GsmDTO updateGsm(GsmDTO gsmDTO);
+
+    FixVpnAdslVpnLLDTO updateFix(FixVpnAdslVpnLLDTO fixVpnAdslVpnLLDTO);
 }
 

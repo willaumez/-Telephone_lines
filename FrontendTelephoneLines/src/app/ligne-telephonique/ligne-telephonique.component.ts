@@ -4,9 +4,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
-import {Observable} from "rxjs";
-import {LigneTelephoniqueDTO} from "../Models/LigneTelephoniqueDTO";
 import {LigneTelephoniqueService} from "../services/ligne-telephonique.service";
+import {MatDialog} from "@angular/material/dialog";
+import {LigneAddEditComponent} from "./ligne-add-edit/ligne-add-edit.component";
+import {CoreService} from "../core/core.service";
 
 @Component({
   selector: 'app-ligne-telephonique',
@@ -18,18 +19,14 @@ export class LigneTelephoniqueComponent implements OnInit {
   displayedColumns: string[] = [
     'id', 'type', 'numeroLigne', 'affectation', 'poste', 'etat', 'dateLivraison',
     'numeroSerie', 'montant', 'fonction', 'forfait', 'codePIN', 'codePUK',
-    'Ip', 'categorie', 'debit', 'ACTIONS'];
+    'adresseIp', 'categorie', 'debit', 'ACTIONS'];
 
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
-  lignesTel$!: Observable<Array<LigneTelephoniqueDTO>>;
-
-
-  constructor(private ligneService: LigneTelephoniqueService) {
+  constructor(private ligneService: LigneTelephoniqueService, private _dialog: MatDialog, private _coreService: CoreService) {
   }
 
   ngOnInit(): void {
@@ -52,7 +49,6 @@ export class LigneTelephoniqueComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -60,20 +56,13 @@ export class LigneTelephoniqueComponent implements OnInit {
 
   formatNumeroLigne(numeroLigne: string): string {
     if (!numeroLigne) return '---';
-
-    // Eliminar espacios en blanco y guiones si existen
     const cleanedNumber = numeroLigne.replace(/[\s-]/g, '');
-
-    // Si el número tiene la forma "0696647847"
     if (cleanedNumber.length === 10) {
       return cleanedNumber.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
     }
-    // Si el número tiene la forma "212696647847"
     else if (cleanedNumber.length === 12) {
       return cleanedNumber.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1-$2-$3-$4');
     }
-
-    // Si no coincide con ninguno de los formatos esperados, devolver el número original
     return numeroLigne;
   }
 
@@ -85,6 +74,54 @@ export class LigneTelephoniqueComponent implements OnInit {
       })
     );
   }*/
+
+
+//MatDialog   (Modal)
+  openAddEditLignForm() {
+    const dialogRef = this._dialog.open(LigneAddEditComponent, {});
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getListLignes();
+        }
+      },
+    });
+    //this.getListLignes();
+  }
+
+
+  // delete
+  handleDeleteLigne(id: number) {
+    let conf = confirm("Es-tu sure de supprimer cette ligne téléphonique?")
+    if (!conf) return;
+    this.ligneService.deleteLigneTelephonique(id).subscribe({
+      next: (res) => {
+        //this._coreService.openSnackBar('Employee deleted!', 'done');
+        this.getListLignes();
+        this._coreService.openSnackBar("La ligne téléphonique a été supprimée avec succès! ");
+      },
+      error:err => {
+        console.log(err);
+      }
+    });
+  }
+
+  //edit
+  openEditForm(data: any) {
+    const dialogRef = this._dialog.open(LigneAddEditComponent, {
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getListLignes();
+        }
+      },
+    });
+  }
+
+
 
 
 }

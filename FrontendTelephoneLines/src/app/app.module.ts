@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AdminTemplateComponent} from './admin-template/admin-template.component';
 import {AppHttpInterceptor} from "./interceptors/app-http.interceptor";
@@ -29,6 +29,13 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {LigneAddEditComponent} from './ligne-telephonique/ligne-add-edit/ligne-add-edit.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -40,6 +47,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     BodyComponent,
     SubLevelMenuComponent,
     LigneTelephoniqueComponent,
+    LigneAddEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +65,14 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     MatSortModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

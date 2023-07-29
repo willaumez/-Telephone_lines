@@ -16,5 +16,5 @@ public class InternetMobileVPNDTO extends LigneTelephoniqueDTO{
     private EtatType etat;
     private Date dateLivraison;
     private String numeroSerie;
-    private String montant;
+    private Double montant;
 }

@@ -31,7 +31,8 @@ public class BackendTelephoneLinesApplication {
         return args -> {
 
 
-            /*Stream.of("0696647846", "0656647847", "0696747847", "0696456847", "0696768747", "0693454847", "0689037847").forEach(numero -> {
+            /*Stream.of("0696647846", "0656647847", "0696747847", "0696456847", "0696768747", "0693454847",
+                    "0689037847","069664784600", "065664784700", "069674784700", "069645684700", "069676874700", "069345484700").forEach(numero -> {
                 InternetMobileDTO internetMobileDTO = new InternetMobileDTO();
                 internetMobileDTO.setNumeroLigne(numero);
                 internetMobileDTO.setEtat(EtatType.ACTIF);
@@ -40,18 +41,21 @@ public class BackendTelephoneLinesApplication {
                 internetMobileDTO.setAffectation("Affectation");
                 internetMobileDTO.setFonction("Fonction");
                 internetMobileDTO.setPoste("Poste");
+                internetMobileDTO.setMontant(10000.0);
                 internetMobileDTO.setNumeroSerie(UUID.randomUUID().toString());
                 internetMobileDTO.setDateLivraison(new Date());
                 ligneTelephoniqueService.saveInternetMobile(internetMobileDTO);
             });
 
 
-            Stream.of("0796647866", "0756647847", "0796747847", "0796456877", "0797768747", "0793455647", "0787897847").forEach(numero -> {
+            Stream.of("0796647866", "0756647847", "0796747847", "0796456877", "0797768747", "0793455647", "0787897847",
+                    "079664786600", "075664784700", "079674784700", "079645687700", "079776874700", "079345564700", "078789784700").forEach(numero -> {
                 InternetMobileVPNDTO internetMobileVPNDTO = new InternetMobileVPNDTO();
                 internetMobileVPNDTO.setNumeroLigne(numero);
                 internetMobileVPNDTO.setEtat(EtatType.ACTIF);
                 internetMobileVPNDTO.setAffectation("Affectation");
                 internetMobileVPNDTO.setPoste("Poste");
+                internetMobileVPNDTO.setMontant(10000.0);
                 internetMobileVPNDTO.setNumeroSerie(UUID.randomUUID().toString());
                 internetMobileVPNDTO.setDateLivraison(new Date());
                 ligneTelephoniqueService.saveInternetMobileVPN(internetMobileVPNDTO);
@@ -67,9 +71,10 @@ public class BackendTelephoneLinesApplication {
                 gsmDTO.setAffectation("Affectation");
                 gsmDTO.setFonction("Fonction");
                 gsmDTO.setNature(NatureType.POINT_DE_VENTE);
-                gsmDTO.setForfait(ForfaitGSM._50G);
+                gsmDTO.setForfait(ForfaitType._50G);
                 gsmDTO.setNomPrenom("NomPrenom");
                 gsmDTO.setPoste("Poste");
+                gsmDTO.setMontant(10000.0);
                 gsmDTO.setNumeroSerie(UUID.randomUUID().toString());
                 gsmDTO.setDateLivraison(new Date());
                 ligneTelephoniqueService.saveGsm(gsmDTO);
@@ -82,8 +87,9 @@ public class BackendTelephoneLinesApplication {
                 fixVpnAdslVpnLLDTO.setEtat(EtatType.ACTIF);
                 fixVpnAdslVpnLLDTO.setAffectation("Affectation");
                 fixVpnAdslVpnLLDTO.setPoste("Poste");
+                fixVpnAdslVpnLLDTO.setMontant(10000.0);
                 fixVpnAdslVpnLLDTO.setNumeroSerie(UUID.randomUUID().toString());
-                fixVpnAdslVpnLLDTO.setIp(numero + "00000");
+                fixVpnAdslVpnLLDTO.setAdresseIp(numero + "00000");
                 fixVpnAdslVpnLLDTO.setCategorie(Categorie.FIX);
                 fixVpnAdslVpnLLDTO.setDebit(DebitType._1M);
                 fixVpnAdslVpnLLDTO.setDateLivraison(new Date());

@@ -1,7 +1,7 @@
 package com.telephone.backendtelephonelines.dtos;
 
 import com.telephone.backendtelephonelines.enums.EtatType;
-import com.telephone.backendtelephonelines.enums.ForfaitGSM;
+import com.telephone.backendtelephonelines.enums.ForfaitType;
 import com.telephone.backendtelephonelines.enums.NatureType;
 import jakarta.persistence.Id;
 import lombok.Data;
@@ -18,11 +18,11 @@ public class GsmDTO extends LigneTelephoniqueDTO{
     private EtatType etat;
     private Date dateLivraison;
     private String numeroSerie;
-    private String montant;
+    private Double montant;
 
     private String fonction;
     private NatureType nature;
-    private ForfaitGSM forfait;
+    private ForfaitType forfait;
     private String nomPrenom;
     private String codePIN;
     private String codePUK;

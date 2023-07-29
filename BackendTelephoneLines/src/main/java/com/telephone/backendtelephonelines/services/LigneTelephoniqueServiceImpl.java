@@ -5,18 +5,15 @@ import com.telephone.backendtelephonelines.entities.*;
 import com.telephone.backendtelephonelines.exceptions.LigneTelephoniqueNotFoundException;
 import com.telephone.backendtelephonelines.exceptions.UserNotFoundException;
 import com.telephone.backendtelephonelines.mappers.LigneTelephoniqueMappers;
-import com.telephone.backendtelephonelines.mappers.LigneTelephoniqueMappersImpl;
 import com.telephone.backendtelephonelines.repositories.LigneTelephoniqueRepository;
 import com.telephone.backendtelephonelines.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -89,6 +86,7 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
 
     @Override
     public InternetMobileDTO saveInternetMobile(InternetMobileDTO internetMobileDTO) {
+        System.out.println("saveInternetMobile--"+internetMobileDTO);
         InternetMobile internetMobile = dtoMapper.fromInternetMobileDTO(internetMobileDTO);
         InternetMobile savedMobile = ligneTelephoniqueRepository.save(internetMobile);
         return dtoMapper.fromInternetMobile(savedMobile);
@@ -181,5 +179,43 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
             }
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteLigneTelephonique(Long id) {
+        ligneTelephoniqueRepository.deleteById(id);
+    }
+
+
+    //update
+    @Override
+    public InternetMobileVPNDTO updateInternetMobileVPN(InternetMobileVPNDTO internetMobileVPNDTO) {
+        InternetMobileVPN internetMobileVPN = dtoMapper.fromInternetMobileVPNDTO(internetMobileVPNDTO);
+        InternetMobileVPN saveInternetVpn = ligneTelephoniqueRepository.save(internetMobileVPN);
+        return dtoMapper.fromInternetMobileVPN(saveInternetVpn);
+    }
+
+    @Override
+    public InternetMobileDTO updateInternetMobile(InternetMobileDTO internetMobileDTO) {
+        InternetMobile internetMobile = dtoMapper.fromInternetMobileDTO(internetMobileDTO);
+        InternetMobile saveInternet = ligneTelephoniqueRepository.save(internetMobile);
+        return dtoMapper.fromInternetMobile(saveInternet);
+    }
+
+    @Override
+    public GsmDTO updateGsm(GsmDTO gsmDTO) {
+        Gsm gsm = dtoMapper.fromGsmDTO(gsmDTO);
+        Gsm saveGsm = ligneTelephoniqueRepository.save(gsm);
+        return dtoMapper.fromGsm(saveGsm);
+    }
+
+    @Override
+    public FixVpnAdslVpnLLDTO updateFix(FixVpnAdslVpnLLDTO fixVpnAdslVpnLLDTO) {
+        FixVpnAdslVpnLL fixVpnAdslVpnLL = dtoMapper.fromFixVpnAdslVpnLLDTO(fixVpnAdslVpnLLDTO);
+        FixVpnAdslVpnLL saveFix = ligneTelephoniqueRepository.save(fixVpnAdslVpnLL);
+        return dtoMapper.fromFixVpnAdslVpnLL(saveFix);
+    }
+
+
+
 }
 

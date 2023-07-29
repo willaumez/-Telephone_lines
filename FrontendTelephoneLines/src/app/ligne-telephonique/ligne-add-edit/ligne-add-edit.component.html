@@ -1,0 +1,189 @@
+<div mat-dialog-title>
+  <h1 *ngIf="!data">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
+  <h1 *ngIf="data">Modifier la ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
+</div>
+<mat-divider></mat-divider>
+<form [formGroup]="lignForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row" *ngIf="!data">
+      <mat-form-field style="width: 300px; margin: 0 auto;">
+        <mat-label>Type de ligne Téléphonique</mat-label>
+        <mat-select [(value)]="defaultType" formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Numero-Ligne</mat-label>
+        <input matInput type="text" placeholder="Ex. 212 000 000 000" formControlName="numeroLigne">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Affectation</mat-label>
+        <input matInput type="text" placeholder="Ex. Babaji" formControlName="affectation">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Poste</mat-label>
+        <input matInput type="text" placeholder="Ex. Technical" formControlName="poste">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Etat</mat-label>
+        <mat-select formControlName="etat" required>
+          <mat-option *ngFor="let etat of etats" [value]="etat.value">
+            {{etat.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <!--<mat-form-field class="col" appearance="outline">
+        <mat-label>Date-Livraison</mat-label>
+        <input matInput type="date" placeholder="28/07/2023" formControlName="dateLivraison">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Date-Livraison</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateLivraison">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      -->
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Date-Livraison</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateLivraison">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Montant</mat-label>
+        <input matInput type="number" placeholder="Ex: 150 dhs" formControlName="montant">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Numero-Serie</mat-label>
+        <input matInput type="text" placeholder="Ex. Babaji" formControlName="numeroSerie">
+      </mat-form-field>
+    </div>
+
+    <!--============ GSM  ===============-->
+    <div class="row" *ngIf="getType() == 'Gsm'">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Fonction</mat-label>
+        <input matInput type="text" placeholder="Ex. Babaji" formControlName="fonction">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Nom-Prenom</mat-label>
+        <input matInput type="text" placeholder="Ex: williams" formControlName="nomPrenom">
+      </mat-form-field>
+
+    </div>
+    <div class="row" *ngIf="getType() == 'Gsm'">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Nature</mat-label>
+        <mat-select formControlName="nature" required>
+          <mat-option *ngFor="let nature of natures" [value]="nature.value">
+            {{nature.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Forfait</mat-label>
+        <mat-select formControlName="forfait" *ngIf="getType() == 'Gsm'" required>
+          <mat-option *ngFor="let forfait of forfaitGsm" [value]="forfait.value">
+            {{forfait.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row" *ngIf="getType() == 'Gsm' || getType() == 'InternetMobile'">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Code-PIN</mat-label>
+        <input matInput type="text" placeholder="Ex: 150" formControlName="codePIN">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Code-PUK</mat-label>
+        <input matInput type="text" placeholder="Ex: 150" formControlName="codePUK">
+      </mat-form-field>
+    </div>
+
+
+    <!--============ Internet-Mobile  ===============-->
+
+    <div class="row" *ngIf="getType() == 'InternetMobile'">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Fonction</mat-label>
+        <input matInput type="text" placeholder="Ex. Babaji" formControlName="fonction">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Forfait</mat-label>
+        <mat-select formControlName="forfait" *ngIf="getType() != 'Gsm'" required>
+          <mat-option *ngFor="let forfait of forfaitInternet" [value]="forfait.value">
+            {{forfait.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--============ InternetMobileVPN  ===============-->
+
+
+    <!--============ FixVpnAdslVpnLL  ===============-->
+
+    <div class="row" *ngIf="getType() == 'FixVpnAdslVpnLL'">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Address-Ip</mat-label>
+        <input matInput type="text" placeholder="Ex. Babaji" formControlName="adresseIp">
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Categorie</mat-label>
+        <mat-select formControlName="categorie" required>
+          <mat-option *ngFor="let categorie of categories" [value]="categorie.value">
+            {{categorie.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Debit</mat-label>
+        <mat-select formControlName="debit" required>
+          <mat-option *ngFor="let debit of debits" [value]="debit.value">
+            {{debit.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions class="button-container action">
+    <button mat-raised-button class="col" type="button" [mat-dialog-close]="false">Annuler</button>
+    <button mat-raised-button class="col" color="primary" type="submit">{{data ? 'Mise à jour': 'Valider'}}</button>
+  </div>
+</form>
+<!--
+displayedColumns: string[] = [
+'id', 'type', 'numeroLigne', 'affectation', 'poste', 'etat', 'dateLivraison',
+'numeroSerie', 'montant', 'fonction', 'forfait', 'codePIN', 'codePUK',
+'Ip', 'categorie', 'debit', 'ACTIONS'];-->

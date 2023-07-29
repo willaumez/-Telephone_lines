@@ -1,8 +1,7 @@
 package com.telephone.backendtelephonelines.entities;
 
 
-import com.telephone.backendtelephonelines.enums.ForfaitGSM;
-import com.telephone.backendtelephonelines.enums.ForfaitInternet;
+import com.telephone.backendtelephonelines.enums.ForfaitType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,7 +21,7 @@ public class InternetMobile extends LigneTelephonique{
     private String fonction;
 
     @Enumerated(EnumType.STRING)
-    private ForfaitInternet forfait;
+    private ForfaitType forfait;
 
     private String codePIN;
     private String codePUK;

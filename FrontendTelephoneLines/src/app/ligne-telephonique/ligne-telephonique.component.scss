@@ -1,12 +1,28 @@
 .main-body {
-  padding-top: 20px;
   margin: 0 auto;
   max-width: 100%;
-  mat-form-field {
-    width: 100%;
+
+}
+.container-fluid{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .filter {
+    width: 350px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  button{
   }
 }
 
+.action {
+  display: flex;
+  gap: 5px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
 
 /* CSS pour les cellules du tableau */
 .mat-cell {
@@ -85,14 +101,40 @@ th{
 
 
 
-mat-paginator{
+/*mat-paginator{
   border-radius: 1rem;
   float: right;
   margin-top: 1rem;
   display: inline-block;
   border: 2px solid #263238;
   font-size: 1rem;
+}*/
+
+.customer-container{
+  display: flex;
+  justify-content: space-between;
+
+  .customer-total{
+    //text-align: center;
+    border-radius: 1rem;
+    float: left;
+    margin-top: 2.5rem;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #263238;
+  }
+  .custom-paginator{
+    border-radius: 1rem;
+    float: right;
+    margin-top: 1rem;
+    display: inline-block;
+    border: 2px solid #263238;
+    font-size: 1rem;
+  }
+
 }
+
+
 
 .mat-elevation-z8 {
   overflow-x: auto;

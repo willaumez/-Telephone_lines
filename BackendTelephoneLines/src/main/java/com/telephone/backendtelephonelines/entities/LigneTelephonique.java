@@ -29,5 +29,5 @@ public abstract class LigneTelephonique {
     private Date dateLivraison;
     @Column(unique = true)
     private String numeroSerie;
-    private String montant;
+    private Double montant;
 }

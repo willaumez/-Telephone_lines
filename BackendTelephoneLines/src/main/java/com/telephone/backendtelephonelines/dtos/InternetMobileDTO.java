@@ -1,7 +1,7 @@
 package com.telephone.backendtelephonelines.dtos;
 
 import com.telephone.backendtelephonelines.enums.EtatType;
-import com.telephone.backendtelephonelines.enums.ForfaitInternet;
+import com.telephone.backendtelephonelines.enums.ForfaitType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
@@ -17,10 +17,10 @@ public class InternetMobileDTO extends LigneTelephoniqueDTO{
     private EtatType etat;
     private Date dateLivraison;
     private String numeroSerie;
-    private String montant;
+    private Double montant;
 
     private String fonction;
-    private ForfaitInternet forfait;
+    private ForfaitType forfait;
     private String codePIN;
     private String codePUK;
 }

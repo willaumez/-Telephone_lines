@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FixVpnAdslVpnLL extends LigneTelephonique{
     @Column(unique = true)
-    private String Ip;
+    private String adresseIp;
 
     @Enumerated(EnumType.STRING)
     private Categorie categorie;

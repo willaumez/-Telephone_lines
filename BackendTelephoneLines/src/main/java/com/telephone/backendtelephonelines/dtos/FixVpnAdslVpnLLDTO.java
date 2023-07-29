@@ -18,9 +18,9 @@ public class FixVpnAdslVpnLLDTO extends LigneTelephoniqueDTO{
     private EtatType etat;
     private Date dateLivraison;
     private String numeroSerie;
-    private String montant;
+    private Double montant;
 
-    private String Ip;
+    private String adresseIp;
     private Categorie categorie;
     private DebitType debit;
 }
