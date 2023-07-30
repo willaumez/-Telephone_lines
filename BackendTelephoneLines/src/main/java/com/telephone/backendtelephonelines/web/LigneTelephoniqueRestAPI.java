@@ -87,5 +87,10 @@ public class LigneTelephoniqueRestAPI {
         return ligneTelephoniqueService.updateFix(fixVpnAdslVpnLLDTO);
     }
 
+    //====================  get Type  ======================//
+    @GetMapping("/lignes/type/{typeLigne}")
+    public List<LigneTelephoniqueDTO> getLigneTelephoniqueById(@PathVariable String typeLigne) throws LigneTelephoniqueNotFoundException {
+        return ligneTelephoniqueService.getTypeLigneTelephonique(typeLigne);
+    }
 
 }

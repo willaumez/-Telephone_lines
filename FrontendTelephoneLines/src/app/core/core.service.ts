@@ -15,7 +15,7 @@ export class CoreService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 5000,
-      //panelClass:['red', 'accent-4', 'text-center', 'white-text']
+      //panelClass: 'custom-snackbar'
     });
   }
 }

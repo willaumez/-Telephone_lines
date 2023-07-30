@@ -53,14 +53,15 @@ export class LigneTelephoniqueService {
     }
   }
 
+  //delete
   public deleteLigneTelephonique(id: number){
     return this.http.delete(environment.backEndHost + "/ligne/deleteLigne/"+id);
   }
 
-
-
-
-
+  //get Type
+  getTypeLignesTelephoniques(type: string) {
+    return this.http.get<Array<LigneTelephoniqueDTO>>(environment.backEndHost+"/lignes/type/"+type);
+  }
 
 
 }

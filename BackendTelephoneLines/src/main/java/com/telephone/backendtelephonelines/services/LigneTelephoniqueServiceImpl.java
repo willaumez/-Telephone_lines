@@ -215,7 +215,23 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
         return dtoMapper.fromFixVpnAdslVpnLL(saveFix);
     }
 
-
+    //get Type
+    @Override
+    public List<LigneTelephoniqueDTO> getTypeLigneTelephonique(String typeLigne){
+        List<LigneTelephonique> ligneTelephoniques = ligneTelephoniqueRepository.findByType(typeLigne);
+        return ligneTelephoniques.stream().map(ligneTelephonique -> {
+            if (ligneTelephonique instanceof InternetMobile internetMobile){
+                return dtoMapper.fromInternetMobile(internetMobile);
+            } else if (ligneTelephonique instanceof InternetMobileVPN internetMobileVPN){
+                return dtoMapper.fromInternetMobileVPN(internetMobileVPN);
+            } else if (ligneTelephonique instanceof Gsm gsm){
+                return dtoMapper.fromGsm(gsm);
+            } else {
+                FixVpnAdslVpnLL fixVpnAdslVpnLL = (FixVpnAdslVpnLL) ligneTelephonique;
+                return dtoMapper.fromFixVpnAdslVpnLL(fixVpnAdslVpnLL);
+            }
+        }).collect(Collectors.toList());
+    }
 
 }
 

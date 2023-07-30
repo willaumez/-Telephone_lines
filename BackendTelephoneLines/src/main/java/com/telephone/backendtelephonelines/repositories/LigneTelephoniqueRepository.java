@@ -11,8 +11,10 @@ import java.util.List;
 @Repository
 public interface LigneTelephoniqueRepository extends JpaRepository<LigneTelephonique, Long> {
 
-    @Query("select c from LigneTelephonique c where c.numeroSerie like :kw or c.numeroLigne like :kw or c.montant like :kw or c.affectation like :kw")
+    @Query("select c from LigneTelephonique c where c.numeroSerie like :kw or c.numeroLigne like :kw or c.affectation like :kw")
     List<LigneTelephonique> searchLigneTelephonique(@Param("kw") String keyword);
 
+    @Query(value = "SELECT * FROM ligne_telephonique WHERE TYPE = :typeLigne", nativeQuery = true)
+    List<LigneTelephonique> findByType(@Param("typeLigne") String typeLigne);
 
 }

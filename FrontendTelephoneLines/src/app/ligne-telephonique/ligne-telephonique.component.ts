@@ -18,7 +18,7 @@ import {CoreService} from "../core/core.service";
 export class LigneTelephoniqueComponent implements OnInit {
   displayedColumns: string[] = [
     'id', 'type', 'numeroLigne', 'affectation', 'poste', 'etat', 'dateLivraison',
-    'numeroSerie', 'montant', 'fonction', 'forfait', 'codePIN', 'codePUK',
+    'numeroSerie', 'montant', 'fonction','nomPrenom', 'nature', 'forfait', 'codePIN', 'codePUK',
     'adresseIp', 'categorie', 'debit', 'ACTIONS'];
 
   dataSource!: MatTableDataSource<any>;

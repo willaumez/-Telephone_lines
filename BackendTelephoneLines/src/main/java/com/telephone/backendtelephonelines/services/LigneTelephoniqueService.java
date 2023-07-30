@@ -41,5 +41,7 @@ public interface LigneTelephoniqueService {
     GsmDTO updateGsm(GsmDTO gsmDTO);
 
     FixVpnAdslVpnLLDTO updateFix(FixVpnAdslVpnLLDTO fixVpnAdslVpnLLDTO);
+
+    List<LigneTelephoniqueDTO> getTypeLigneTelephonique(String typeLigne);
 }
 

@@ -1,9 +1,10 @@
 .main-body {
   margin: 0 auto;
   max-width: 100%;
+
 }
 
-.listLigne {
+.typeligne {
   font-size: 28px;
   font-weight: bold;
   color: #333;
@@ -15,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .filter {
-    width: 350px;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  button{
-  }
+.filter {
+  width: 350px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+button{
+}
 }
 
 .action {
@@ -59,21 +60,6 @@ td, th {
 th{
   font-size: 1rem;
 }
-/*
-.action-container{
-  display: inline-block;
-  justify-content: space-between;
-  align-items: center; // Centrer les boutons verticalement dans la cellule
-  width: 100%;
-}
-*/
-
-
-/*.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}*/
 
 @keyframes loopEffect {
   0%, 100% {
@@ -88,10 +74,10 @@ th{
 .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
   background-color: #dcdcde;
-  //font-size: 1rem;
+//font-size: 1rem;
   font-weight: bold;
- // color: #030303;
-  //animation: loopEffect 1s infinite;
+// color: #030303;
+//animation: loopEffect 1s infinite;
   transition: transform 0.3s ease;
   transform: scale(1);
 }
@@ -121,23 +107,23 @@ th{
   display: flex;
   justify-content: space-between;
 
-  .customer-total{
-    //text-align: center;
-    border-radius: 1rem;
-    float: left;
-    margin-top: 2.5rem;
-    display: inline-block;
-    font-size: 1.5rem;
-    color: #263238;
-  }
-  .custom-paginator{
-    border-radius: 1rem;
-    float: right;
-    margin-top: 1rem;
-    display: inline-block;
-    border: 2px solid #263238;
-    font-size: 1rem;
-  }
+.customer-total{
+//text-align: center;
+  border-radius: 1rem;
+  float: left;
+  margin-top: 2.5rem;
+  display: inline-block;
+  font-size: 1.5rem;
+  color: #263238;
+}
+.custom-paginator{
+  border-radius: 1rem;
+  float: right;
+  margin-top: 1rem;
+  display: inline-block;
+  border: 2px solid #263238;
+  font-size: 1rem;
+}
 
 }
 

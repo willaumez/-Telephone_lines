@@ -52,6 +52,7 @@ export class LigneAddEditComponent implements OnInit {
     {value: 'POINT_DE_VENTE', viewValue: 'POINT_DE_VENTE'},
   ]
   defaultType = this.types[0].value;
+  typeList!: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -88,7 +89,13 @@ export class LigneAddEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lignForm.patchValue(this.data);
+    if (this.data && 'typeLigne' in this.data){
+      this.lignForm.patchValue({
+        type: this.data.typeLigne.value,
+      });
+    }else {
+      this.lignForm.patchValue(this.data);
+    }
   }
 
   onFormSubmit() {

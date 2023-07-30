@@ -7,6 +7,13 @@ import { InternetMobileComponent } from './internet-mobile/internet-mobile.compo
 import { InternetMobileVPNComponent } from './internet-mobile-vpn/internet-mobile-vpn.component';
 import { GSMComponent } from './gsm/gsm.component';
 import { FixVpnadslVpnllComponent } from './fix-vpnadsl-vpnll/fix-vpnadsl-vpnll.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -17,9 +24,16 @@ import { FixVpnadslVpnllComponent } from './fix-vpnadsl-vpnll/fix-vpnadsl-vpnll.
     GSMComponent,
     FixVpnadslVpnllComponent
   ],
-  imports: [
-    CommonModule,
-    TypesRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        TypesRoutingModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule
+    ]
 })
 export class TypesModule { }

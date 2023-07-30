@@ -1,6 +1,7 @@
 <div mat-dialog-title>
   <h1 *ngIf="!data">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
-  <h1 *ngIf="data">Modifier la ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
+  <h1 *ngIf="data && !data.typeLigne">Modifier la ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
+  <h1 *ngIf="data && data.typeLigne">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
 </div>
 <mat-divider></mat-divider>
 <form [formGroup]="lignForm" (ngSubmit)="onFormSubmit()">
@@ -12,6 +13,14 @@
           <mat-option *ngFor="let type of types" [value]="type.value">
             {{type.viewValue}}
           </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row" *ngIf="data && data.typeLigne">
+      <mat-form-field style="width: 300px; margin: 0 auto;">
+        <mat-label>Type de ligne Téléphonique</mat-label>
+        <mat-select [(value)]="defaultType" formControlName="type">
+          <mat-option [value]="data.typeLigne.value">{{ data.typeLigne.viewValue }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
