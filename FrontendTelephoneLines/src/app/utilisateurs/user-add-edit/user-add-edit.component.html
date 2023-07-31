@@ -1,0 +1,73 @@
+<div mat-dialog-title>
+  <h1 *ngIf="!data">Ajouter un utilisateur  </h1>
+  <h1 *ngIf="data">Modifier l'utilisateur: <span style="color: blue"> {{getName()}}</span>  </h1>
+</div>
+<mat-divider></mat-divider>
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+
+    <div class="row">
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Nom utilisateur</mat-label>
+        <input matInput type="text" placeholder="Saad..." formControlName="username">
+        <mat-error *ngIf="!userForm.controls['username'].valid">
+          Nom requis : min 4 !
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" placeholder="Ex. saad@gmail.com" formControlName="email">
+        <mat-error *ngIf="!userForm.controls['email'].valid">
+          E-mail requis !
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field *ngIf="data" class="col" appearance="outline">
+        <mat-label>Nouveau Mot de passe</mat-label>
+        <input matInput type="text" placeholder="Sa_12" formControlName="password">
+        <mat-error *ngIf="!userForm.controls['password'].valid">
+          Mot de passe requis : min 6
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="!data" class="col" appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="text" placeholder="Sa_12" formControlName="password">
+        <mat-error *ngIf="!userForm.controls['password'].valid">
+          Mot de passe requis : min 6
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col" appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{role.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!userForm.controls['role'].valid">
+          Définir un role !
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions class="button-container action">
+    <button mat-raised-button class="col" type="button" [mat-dialog-close]="false">Annuler</button>
+    <button mat-raised-button class="col" color="primary" type="submit">{{data ? 'Mise à jour': 'Valider'}}</button>
+  </div>
+</form>
+
+<!--
+displayedColumns: string[] = [
+'id', 'type', 'numeroLigne', 'affectation', 'poste', 'etat', 'dateLivraison',
+'numeroSerie', 'montant', 'fonction', 'forfait', 'codePIN', 'codePUK',
+'Ip', 'categorie', 'debit', 'ACTIONS'];
+-->

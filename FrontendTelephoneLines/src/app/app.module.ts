@@ -37,6 +37,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
+import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
     LigneTelephoniqueComponent,
     LigneAddEditComponent,
     UtilisateursComponent,
+    UserAddEditComponent,
   ],
   imports: [
     BrowserModule,

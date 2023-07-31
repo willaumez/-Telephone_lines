@@ -6,6 +6,7 @@ import {UserService} from "../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CoreService} from "../core/core.service";
 import {LigneAddEditComponent} from "../ligne-telephonique/ligne-add-edit/ligne-add-edit.component";
+import {UserAddEditComponent} from "./user-add-edit/user-add-edit.component";
 
 @Component({
   selector: 'app-utilisateurs',
@@ -52,7 +53,7 @@ export class UtilisateursComponent implements OnInit{
   }
 
   openAddEditLignForm() {
-    const dialogRef = this._dialog.open(LigneAddEditComponent, {});
+    const dialogRef = this._dialog.open(UserAddEditComponent, {});
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
@@ -82,7 +83,8 @@ export class UtilisateursComponent implements OnInit{
 
   //edit
   openEditForm(data: any) {
-    const dialogRef = this._dialog.open(LigneAddEditComponent, {
+    console.log("openEditForm(data: any)--", data);
+    const dialogRef = this._dialog.open(UserAddEditComponent, {
       data,
     });
 

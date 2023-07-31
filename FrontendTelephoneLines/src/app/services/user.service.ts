@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {User} from "../Models/User";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +15,11 @@ export class UserService {
     return this.http.get<Array<User>>(environment.backEndHost+"/users");
   }
 
+  public updateUser(user: User): Observable<User> {
+    return this.http.put<User>(environment.backEndHost+"/users/"+user.id, user);
+  }
+
+  public saveUser(user: User): Observable<User> {
+    return this.http.post<User>(environment.backEndHost+"/users", user);
+  }
 }
