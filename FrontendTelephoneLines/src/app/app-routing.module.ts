@@ -5,6 +5,7 @@ import {AdminTemplateComponent} from "./admin-template/admin-template.component"
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
+import {UtilisateursComponent} from "./utilisateurs/utilisateurs.component";
 
 const routes: Routes = [
 
@@ -21,7 +22,7 @@ const routes: Routes = [
           path: 'types',
           loadChildren: () => import('./types/types.module').then(m => m.TypesModule)
         },
-        {path: 'users', component: LoginComponent},
+        {path: 'users', component: UtilisateursComponent},
         {path: 'notAuthorized', component: NotAuthorizedComponent},
       ],
     },

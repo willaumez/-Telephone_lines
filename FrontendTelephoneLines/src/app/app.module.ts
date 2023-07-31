@@ -23,7 +23,6 @@ import {MatTableModule} from '@angular/material/table';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {BodyComponent} from './body/body.component';
 import {SubLevelMenuComponent} from './sidenav/sub-level-menu.component';
-import {LigneTelephoniqueComponent} from './ligne-telephonique/ligne-telephonique.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSidenavModule} from "@angular/material/sidenav";
@@ -36,6 +35,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
+import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     SubLevelMenuComponent,
     LigneTelephoniqueComponent,
     LigneAddEditComponent,
+    UtilisateursComponent,
   ],
   imports: [
     BrowserModule,
