@@ -233,5 +233,10 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
         }).collect(Collectors.toList());
     }
 
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsernameOrEmail(username, username);
+    }
+
 }
 

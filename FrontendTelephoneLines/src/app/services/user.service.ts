@@ -22,4 +22,8 @@ export class UserService {
   public saveUser(user: User): Observable<User> {
     return this.http.post<User>(environment.backEndHost+"/users", user);
   }
+
+  public deleteUser(id: number) {
+    return this.http.delete(environment.backEndHost+"/users/"+id);
+  }
 }

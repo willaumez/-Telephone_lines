@@ -38,6 +38,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

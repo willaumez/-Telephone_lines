@@ -43,5 +43,7 @@ public interface LigneTelephoniqueService {
     FixVpnAdslVpnLLDTO updateFix(FixVpnAdslVpnLLDTO fixVpnAdslVpnLLDTO);
 
     List<LigneTelephoniqueDTO> getTypeLigneTelephonique(String typeLigne);
+
+    User getUserByUsername(String username);
 }
 

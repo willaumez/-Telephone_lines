@@ -7,7 +7,7 @@ const navbarData: INavBarData[] = [
     label: 'Accueil'
   },
   {
-    routeLink: 'types',
+    routeLink: 'types/gsm',
     icon: 'fas fa-folder',
     label: 'Types',
     items: [

@@ -1,5 +1,7 @@
 package com.telephone.backendtelephonelines.security;
 
+import com.telephone.backendtelephonelines.entities.User;
+import com.telephone.backendtelephonelines.services.LigneTelephoniqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +32,9 @@ public class SecurityController {
     @Autowired
     private JwtEncoder jwtEncoder;
 
+    @Autowired
+    private LigneTelephoniqueService userServices;
+
     @GetMapping("/profile")
     public Authentication authentication(Authentication authentication){
         return authentication;
@@ -42,13 +47,20 @@ public class SecurityController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );
+        User user = userServices.getUserByUsername(username);
+        System.out.println("user::   "+user);
 
         Instant instant= Instant.now();
         String scope = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining("  "));
         JwtClaimsSet jwtClaimsSet= JwtClaimsSet.builder()
                 .issuedAt(instant)
-                .expiresAt(instant.plus(10, ChronoUnit.MINUTES))
+                .expiresAt(instant.plus(15, ChronoUnit.MINUTES))
                 .subject(username)
+                .claim("scope", scope)
+                .claim("username", user.getUsername())
+                .claim("email", user.getEmail())
+                .claim("password", user.getPassword())
+                .claim("role", user.getRole())
                 .claim("scope", scope)
                 .build();
 

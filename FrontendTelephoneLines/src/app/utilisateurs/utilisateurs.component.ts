@@ -7,6 +7,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {CoreService} from "../core/core.service";
 import {LigneAddEditComponent} from "../ligne-telephonique/ligne-add-edit/ligne-add-edit.component";
 import {UserAddEditComponent} from "./user-add-edit/user-add-edit.component";
+import {LoginService} from "../services/login.service";
+import {User} from "../Models/User";
 
 @Component({
   selector: 'app-utilisateurs',
@@ -16,7 +18,7 @@ import {UserAddEditComponent} from "./user-add-edit/user-add-edit.component";
 export class UtilisateursComponent implements OnInit{
 
   displayedColumns: string[] = [
-    'id', 'username', 'email', 'password', 'role', 'ACTIONS'];
+    'id', 'username', 'email', 'role', 'ACTIONS'];
 
   @Input()
   dataSource!: MatTableDataSource<any>;
@@ -24,7 +26,8 @@ export class UtilisateursComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private userService: UserService, private _dialog: MatDialog, private _coreService: CoreService) { }
+  constructor(private userService: UserService, private _dialog: MatDialog,
+              private _coreService: CoreService, public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.getUtilisateurs();
@@ -34,7 +37,6 @@ export class UtilisateursComponent implements OnInit{
     this.userService.listUsers().subscribe(
       (data: any[]) => {
         this.dataSource = new MatTableDataSource(data);
-        console.log(data)
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
@@ -67,18 +69,19 @@ export class UtilisateursComponent implements OnInit{
 
   // delete
   handleDeleteLigne(id: number) {
-    /*let conf = confirm("Es-tu sure de supprimer cette ligne téléphonique?")
+    let conf = confirm("Es-tu sure de supprimer cet utilisateur ?")
     if (!conf) return;
-    this.ligneService.deleteLigneTelephonique(id).subscribe({
+    this.userService.deleteUser(id).subscribe({
       next: (res) => {
         //this._coreService.openSnackBar('Employee deleted!', 'done');
-        this.getListLignes();
-        this._coreService.openSnackBar("La ligne téléphonique a été supprimée avec succès! ");
+        this.getUtilisateurs();
+        this._coreService.openSnackBar("L'utilisateur a été supprimée avec succès! ");
       },
       error:err => {
+        this._coreService.openSnackBar("Utilisateur Innexistant! ");
         console.log(err);
       }
-    });*/
+    });
   }
 
   //edit
@@ -97,4 +100,13 @@ export class UtilisateursComponent implements OnInit{
     });
   }
 
+  /*showRole(role: string | null): String {
+    if (role == 'ADMIN')
+      return "ADMINISTRATEUR";
+    else return "UTILISATEUR"
+  }*/
+
+  handleDetailUser(row: User) {
+    
+  }
 }

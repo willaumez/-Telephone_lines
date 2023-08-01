@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
 import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
+import {CoreService} from "../core/core.service";
 
 
 // Fonction validateur personnalisée
@@ -26,7 +27,7 @@ function emailOrNameValidator(control: FormControl): { [key: string]: any } | nu
 export class LoginComponent implements OnInit{
   formLogin! : FormGroup;
   hide: boolean = true;
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private _coreService: CoreService) {
   }
   ngOnInit(): void {
     this.formLogin= this.fb.group({
@@ -40,32 +41,33 @@ export class LoginComponent implements OnInit{
     let password = this.formLogin.value.password;
 
     if (username && password){
-       this.loginService.login(username, password).subscribe({
+      this.loginService.login(username, password).subscribe({
         next: data => {
           this.loginService.loadProfile(data);
           this.router.navigateByUrl("/admin");
+          this._coreService.openSnackBar('Connexion réussie ! ')
         },
         error: err => {
-          console.log("data---  ", err)
+          this._coreService.openSnackBar('Entrer un e-mail et un mot de passe valide! ')
         }
       })
     }
   }
 
-/*  async handleLogin() {
-    let username = this.formLogin.value.username;
-    let password = this.formLogin.value.password;
+  /*  async handleLogin() {
+      let username = this.formLogin.value.username;
+      let password = this.formLogin.value.password;
 
-    if (username && password) {
-      try {
-        const data = await this.loginService.login(username, password).toPromise();
-        this.loginService.loadProfile(data);
-        this.router.navigateByUrl("/admin");
-      } catch (err) {
-        console.log("Error: ", err);
+      if (username && password) {
+        try {
+          const data = await this.loginService.login(username, password).toPromise();
+          this.loginService.loadProfile(data);
+          this.router.navigateByUrl("/admin");
+        } catch (err) {
+          console.log("Error: ", err);
+        }
       }
-    }
-  }*/
+    }*/
 
 }
 
