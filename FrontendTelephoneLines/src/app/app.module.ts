@@ -39,6 +39,8 @@ import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephoniqu
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit.component';
 import {MatChipsModule} from "@angular/material/chips";
+import { ProfilComponent } from './profil/profil.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import {MatChipsModule} from "@angular/material/chips";
     LigneAddEditComponent,
     UtilisateursComponent,
     UserAddEditComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import {MatChipsModule} from "@angular/material/chips";
     FormsModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatGridListModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

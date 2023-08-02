@@ -48,6 +48,12 @@ public class UserRestController {
         userServices.deleteUser(id);
     }
 
+    @GetMapping("/confirm/{id}/{password}")
+    public boolean confirmPassword(@PathVariable Long id, @PathVariable String password)  throws UserNotFoundException{
+        System.out.println( "Long id, @PathVariable String password--"+id+"   "+password);
+        return userServices.confirmPassword(id,password);
+    }
+
 
 
 

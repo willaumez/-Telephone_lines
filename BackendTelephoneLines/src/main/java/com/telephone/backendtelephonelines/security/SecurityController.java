@@ -61,6 +61,7 @@ public class SecurityController {
                 .claim("email", user.getEmail())
                 .claim("password", user.getPassword())
                 .claim("role", user.getRole())
+                .claim("id", user.getId())
                 .claim("scope", scope)
                 .build();
 

@@ -1,7 +1,6 @@
 package com.telephone.backendtelephonelines.services;
 
 import com.telephone.backendtelephonelines.dtos.*;
-import com.telephone.backendtelephonelines.entities.InternetMobile;
 import com.telephone.backendtelephonelines.entities.User;
 import com.telephone.backendtelephonelines.exceptions.LigneTelephoniqueNotFoundException;
 import com.telephone.backendtelephonelines.exceptions.UserNotFoundException;
@@ -45,5 +44,7 @@ public interface LigneTelephoniqueService {
     List<LigneTelephoniqueDTO> getTypeLigneTelephonique(String typeLigne);
 
     User getUserByUsername(String username);
+
+    boolean confirmPassword(Long id, String password) throws UserNotFoundException ;
 }
 

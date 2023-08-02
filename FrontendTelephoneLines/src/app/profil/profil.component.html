@@ -1,0 +1,120 @@
+<div class="main-body">
+
+  <div class="row"><h1 class="titre">Profil utilisateur</h1></div>
+
+  <mat-grid-list cols="2" rowHeight="2.5:1">
+    <mat-grid-tile colspan="1">
+      <mat-grid-tile-header>Username:</mat-grid-tile-header>
+      {{ userData.username }}
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="3">
+      <div class="container">
+        <div class="button-container row">
+          <button mat-raised-button type="button" (click)="showEditInfos()" *ngIf="!showPasswordEdit"
+                  [style.background-color]="showInfosEdit ? '#1b6ca8' : ''"
+                  [style.color]="showInfosEdit ? 'white' : ''"
+          >Modifier les informations ?
+          </button>
+          <button mat-raised-button type="button" (click)="showChangePassword()" *ngIf="!showInfosEdit"
+                  [style.background-color]="showPasswordEdit ? '#1b6ca8' : ''"
+                  [style.color]="showPasswordEdit ? 'white' : ''"
+          >Changer le mot de passe ?
+          </button>
+        </div>
+
+
+        <div class="container" *ngIf="showInfosEdit">
+          <mat-divider></mat-divider>
+          <!-- change infos-->
+          <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+            <div class="row">
+              <mat-form-field class="col" appearance="outline">
+                <mat-label>Nom utilisateur</mat-label>
+                <input matInput type="text" placeholder="Saad..." formControlName="username" required>
+                <mat-error *ngIf="!userForm.controls['username'].valid">
+                  Nom requis : min 4 !
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="email" placeholder="Ex. saad@gmail.com" formControlName="email" required>
+                <mat-error *ngIf="!userForm.controls['email'].valid">
+                  E-mail requis !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div mat-dialog-actions class="button-container2 action row">
+              <button mat-raised-button class="col" type="button" (click)="showEditInfos()">Annuler</button>
+              <button mat-raised-button class="col" color="primary" type="submit">Valider</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- change password-->
+        <div class="container" *ngIf="showPasswordEdit">
+          <mat-divider></mat-divider>
+          <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+            <div class="row" *ngIf="!passwordConfirmed">
+              <mat-form-field class="col" appearance="outline">
+                <mat-label>Ancien mot de pass:</mat-label>
+                <input matInput type="text" placeholder="Saad..." formControlName="password" required>
+                <!--<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+
+                <mat-error *ngIf="userForm.get('password')?.hasError('required')">Mot de passe requis</mat-error>
+                <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">Mot de passe trop court : min 6
+                  caractères
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="row" *ngIf="passwordConfirmed">
+              <mat-form-field class="col" appearance="outline">
+                <mat-label>Nouveau mot de pass:</mat-label>
+                <input matInput type="text" placeholder="Saad..." formControlName="password" required>
+                <!--<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+
+                <mat-error *ngIf="userForm.get('password')?.hasError('required')">Mot de passe requis</mat-error>
+                <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">Mot de passe trop court : min 6
+                  caractères
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col" appearance="outline">
+                <mat-label>Confirmer: Nouveau mot de pass:</mat-label>
+                <input matInput type="text" placeholder="Saad..." formControlName="password2" required>
+                <!--<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+
+                <mat-error *ngIf="userForm.get('password2')?.hasError('required')">Mot de passe requis</mat-error>
+                <mat-error *ngIf="userForm.hasError('passwordMismatch')">Les mots de passe ne correspondent pas
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div mat-dialog-actions class="button-container2 action row">
+              <button mat-raised-button class="col" type="button" (click)="showEditInfos()">Annuler</button>
+              <button mat-raised-button class="col" color="primary" type="submit">Valider</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </mat-grid-tile>
+
+    <mat-grid-tile class="email" colspan="1">
+      <mat-grid-tile-header>Email:</mat-grid-tile-header>
+      {{ userData.email }}
+    </mat-grid-tile>
+
+    <mat-grid-tile class="role" colspan="1">
+      <mat-grid-tile-header>Role:</mat-grid-tile-header>
+      {{ userData.role }}
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <mat-divider></mat-divider>
+
+</div>

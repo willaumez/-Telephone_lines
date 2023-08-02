@@ -5,7 +5,7 @@ import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition}
   providedIn: 'root',
 })
 export class CoreService {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(private _snackBar: MatSnackBar) { }

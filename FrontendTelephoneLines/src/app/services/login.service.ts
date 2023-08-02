@@ -2,18 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import jwtDecode from "jwt-decode";
-import {map, Observable} from "rxjs";
+import {User} from "../Models/User";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  userData : User | any;
 
   isAuthenticated: boolean = false;
-  roles: any;
-  username: any;
-  email: any;
-  password: any;
   accessToken!: any;
 
   constructor(private http: HttpClient) {
@@ -45,21 +42,34 @@ export class LoginService {
     this.isAuthenticated = true;
     this.accessToken = data['access-token'];
     let decodeJwt: any = jwtDecode(this.accessToken);
-    this.username = decodeJwt.username;
-    this.roles = decodeJwt.scope;
-    this.email = decodeJwt.email;
-    this.password = decodeJwt.password;
+    console.log("userData---"+decodeJwt);
 
+    this.userData = {
+      id: decodeJwt.id,
+      username: decodeJwt.username,
+      email: decodeJwt.email,
+      password: decodeJwt.password,
+      role: decodeJwt.role,
+    };
+    //console.log("userData --- " + JSON.stringify(this.userData, null, 2));
   }
 
   logout() {
+    console.log("userData---"+this.userData);
     this.isAuthenticated = false;
     this.accessToken = undefined;
-    this.username = undefined;
-    this.roles = undefined;
-    this.email = undefined;
-    this.password = undefined;
+    this.userData = undefined;
+
   }
 
-
+  public getUserData(): User {
+    return this.userData;
+  }
+  setUserData(user: User) {
+    this.userData = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    };
+  }
 }

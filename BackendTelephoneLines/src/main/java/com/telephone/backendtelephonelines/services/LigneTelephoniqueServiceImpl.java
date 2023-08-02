@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -236,6 +237,30 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
     @Override
     public User getUserByUsername(String username) {
         return userRepository.findByUsernameOrEmail(username, username);
+    }
+
+    /*@Override
+    public boolean confirmPassword(Long id, String password) throws UserNotFoundException {
+        User user = userRepository.findById(id) .orElseThrow(() -> new UserNotFoundException("----- User Not found -----"));;
+        String passwordUser = user.getPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        if (passwordUser === passwordEncoder){
+            return true;
+        }else return false;
+    }*/
+
+    @Override
+    public boolean confirmPassword(Long id, String password) throws UserNotFoundException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User Not found"));
+
+        String passwordUser = user.getPassword();
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println("matchesmatchesmatchesmatches---"+passwordEncoder.matches(password, passwordUser));
+
+        return passwordEncoder.matches(password, passwordUser);
     }
 
 }

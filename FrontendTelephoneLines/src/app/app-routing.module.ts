@@ -6,6 +6,7 @@ import {AuthenticationGuard} from "./guards/authentication.guard";
 import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component";
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
 import {UtilisateursComponent} from "./utilisateurs/utilisateurs.component";
+import {ProfilComponent} from "./profil/profil.component";
 
 const routes: Routes = [
 
@@ -23,6 +24,7 @@ const routes: Routes = [
           loadChildren: () => import('./types/types.module').then(m => m.TypesModule)
         },
         {path: 'users', component: UtilisateursComponent},
+        {path: 'profile', component: ProfilComponent},
         {path: 'notAuthorized', component: NotAuthorizedComponent},
       ],
     },

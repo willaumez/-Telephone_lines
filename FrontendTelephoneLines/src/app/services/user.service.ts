@@ -26,4 +26,10 @@ export class UserService {
   public deleteUser(id: number) {
     return this.http.delete(environment.backEndHost+"/users/"+id);
   }
+
+  public confirmPassword(id: number, password: string) {
+    return this.http.get<boolean>(environment.backEndHost+"/confirm/"+id+"/"+password);
+  }
+
+
 }
