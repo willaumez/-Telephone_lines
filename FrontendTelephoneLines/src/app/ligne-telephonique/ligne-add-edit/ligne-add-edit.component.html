@@ -1,7 +1,9 @@
 <div mat-dialog-title>
-  <h1 *ngIf="!data">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
-  <h1 *ngIf="data && !data.typeLigne">Modifier la ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
-  <h1 *ngIf="data && data.typeLigne">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>  </h1>
+  <h1 *ngIf="!data">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span></h1>
+  <h1 *ngIf="data && !data.typeLigne">Modifier la ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>
+  </h1>
+  <h1 *ngIf="data && data.typeLigne">Ajouter une ligne Téléphonique: <span style="color: blue"> {{getType()}}</span>
+  </h1>
 </div>
 <mat-divider></mat-divider>
 <form [formGroup]="lignForm" (ngSubmit)="onFormSubmit()">
@@ -27,9 +29,19 @@
 
     <div class="row">
       <mat-form-field class="col" appearance="outline">
-        <mat-label>Numero-Ligne</mat-label>
-        <input matInput type="text" placeholder="Ex. 212 000 000 000" formControlName="numeroLigne">
+        <mat-label>Numero-Ligne(9)</mat-label>
+        <span matPrefix style="margin-left: 10px">+212 - &nbsp;&nbsp;</span>
+        <input matInput type="text" placeholder="Ex. 00 000 000" formControlName="numeroLigne"
+               (input)="limitNumeroLigneInput($event)">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="lignForm.get('numeroLigne')?.hasError('pattern')">
+         <span *ngIf="getType() === 'Gsm' || getType() === 'InternetMobile'">
+          Le numéro de ligne {{ getType() === 'Gsm' ? 'GSM' : 'Internet-Mobile' }} doit commencer par 6 ou 7 !</span>
+          <span *ngIf="getType() === 'InternetMobileVPN' || getType() === 'FixVpnAdslVpnLL'">
+          Le numéro de ligne {{ getType() === 'InternetMobileVPN' ? 'Internet-Mobile-VPN' : 'FixVpnAdslVpnLL' }} doit commencer par 5 !</span>
+        </mat-error>
       </mat-form-field>
+
 
       <mat-form-field class="col" appearance="outline">
         <mat-label>Affectation</mat-label>
@@ -188,7 +200,7 @@
 
   <div mat-dialog-actions class="button-container action">
     <button mat-raised-button class="col" type="button" [mat-dialog-close]="false">Annuler</button>
-    <button mat-raised-button class="col" color="primary" type="submit">{{data ? 'Mise à jour': 'Valider'}}</button>
+    <button mat-raised-button class="col" color="primary" type="submit">{{data ? 'Mise à jour' : 'Valider'}}</button>
   </div>
 </form>
 <!--

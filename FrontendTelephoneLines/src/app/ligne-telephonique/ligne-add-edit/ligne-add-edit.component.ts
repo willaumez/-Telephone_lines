@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {LigneTelephoniqueService} from "../../services/ligne-telephonique.service";
 import {LigneTelephoniqueDTO} from "../../Models/LigneTelephoniqueDTO";
@@ -63,7 +63,7 @@ export class LigneAddEditComponent implements OnInit {
   ) {
     this.lignForm = this._fb.group({
       type: this.defaultType,
-      numeroLigne: '',
+      numeroLigne: ['', [Validators.required, Validators.pattern('[657]-[0-9]{3}-[0-9]{3}-[0-9]{3}')]],
       affectation: '',
       poste: '',
       etat: '',
@@ -79,7 +79,7 @@ export class LigneAddEditComponent implements OnInit {
       categorie: '',
       debit: '',
       adresseIp: '',
-      id:'',
+      id: '',
     });
   }
 
@@ -89,11 +89,11 @@ export class LigneAddEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.data && 'typeLigne' in this.data){
+    if (this.data && 'typeLigne' in this.data) {
       this.lignForm.patchValue({
         type: this.data.typeLigne.value,
       });
-    }else {
+    } else {
       this.lignForm.patchValue(this.data);
     }
   }
@@ -112,6 +112,7 @@ export class LigneAddEditComponent implements OnInit {
       })
     } else {
       let lignTel: LigneTelephoniqueDTO = this.lignForm?.value;
+      console.log("numIni--  ", lignTel)
       this._ligneService.saveLigneTelephonique(lignTel).subscribe({
         next: (val: any) => {
           this._coreService.openSnackBar('Ligne téléphonique ajoutée avec succès')
@@ -128,6 +129,77 @@ export class LigneAddEditComponent implements OnInit {
   getType(): string {
     return this.lignForm.value.type;
   }
+
+  //format
+  /*limitNumeroLigneInput(event: any): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value.replace(/[^\d]/g, '');  // Enleve tout sauf les chiffres
+
+
+    if (value.length > 9) {
+      input.value = value.slice(0, 9);
+    } else {
+      input.value = value;
+    }
+
+    // Format with spaces
+    if (input.value.length >= 1) {
+      const formattedValue = input.value.replace(/([67])(\d{0,3})(\d{0,3})(\d{0,3})/, '$1 $2 $3 $4');
+      input.value = formattedValue.trim();
+    }
+
+    this.lignForm.patchValue({numeroLigne: input.value.replace(/\s/g, '')});
+
+    if (input.value.length === 9 && (input.value.startsWith('6') || input.value.startsWith('7'))) {
+      this.lignForm.get('numeroLigne')?.setErrors(null);
+    } else {
+      this.lignForm.get('numeroLigne')?.setErrors({pattern: true});
+    }
+  }*/
+
+
+  limitNumeroLigneInput(event: any): void {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/[^\d]/g, '');  // Remove all non-digits
+
+    // Apply conditions based on getType()
+    const type = this.getType(); // Replace this with your actual getType() function
+    if (type === 'Gsm' || type === 'InternetMobile') {
+      value = value.replace(/^[^67]/, ''); // Remove anything that doesn't start with 6 or 7
+    } else if (type === 'InternetMobileVPN') {
+      value = value.replace(/^[^5]/, ''); // Remove anything that doesn't start with 5
+    } else if (type === 'FixVpnAdslVpnLL') {
+      value = value.replace(/^[^5]/, ''); // Remove anything that doesn't start with 5
+    }
+
+    if (value.length > 9) {
+      value = value.slice(0, 9);
+    }
+
+    // Format with spaces
+    if (value.length >= 1) {
+      const formattedValue = value.replace(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,3})/, '$1 $2 $3 $4');
+      input.value = formattedValue.trim();
+    } else {
+      input.value = value;
+    }
+
+    this.lignForm.patchValue({ numeroLigne: value.replace(/\s/g, '') });
+
+    // Validate based on conditions
+    if (
+      (value.length === 9 && (type === 'Gsm' || type === 'InternetMobile') && (value.startsWith('6') || value.startsWith('7'))) ||
+      (type === 'InternetMobileVPN' && value.startsWith('5')) ||
+      (type === 'FixVpnAdslVpnLL' && value.startsWith('5'))
+    ) {
+      this.lignForm.get('numeroLigne')?.setErrors(null);
+    } else {
+      this.lignForm.get('numeroLigne')?.setErrors({ pattern: true });
+    }
+  }
+
+
+
 
 }
 

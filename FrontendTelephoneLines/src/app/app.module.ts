@@ -41,6 +41,8 @@ import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit
 import {MatChipsModule} from "@angular/material/chips";
 import { ProfilComponent } from './profil/profil.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { RapprochementComponent } from './rapprochement/rapprochement.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
     UtilisateursComponent,
     UserAddEditComponent,
     ProfilComponent,
+    RapprochementComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     FormsModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

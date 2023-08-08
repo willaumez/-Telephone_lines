@@ -4,7 +4,7 @@
 
   <mat-grid-list cols="2" rowHeight="2.5:1">
     <mat-grid-tile colspan="1">
-      <mat-grid-tile-header>Username:</mat-grid-tile-header>
+      <mat-grid-tile-header>Nom utilisateur:</mat-grid-tile-header>
       {{ userData.username }}
     </mat-grid-tile>
 
@@ -93,7 +93,7 @@
             </div>
 
             <div mat-dialog-actions class="button-container2 action row">
-              <button mat-raised-button class="col" type="button" (click)="showEditInfos()">Annuler</button>
+              <button mat-raised-button class="col" type="button" (click)="handleReset()">Annuler</button>
               <button mat-raised-button class="col" color="primary" type="submit">Valider</button>
             </div>
           </form>

@@ -8,6 +8,7 @@ import {LigneTelephoniqueService} from "../services/ligne-telephonique.service";
 import {MatDialog} from "@angular/material/dialog";
 import {LigneAddEditComponent} from "./ligne-add-edit/ligne-add-edit.component";
 import {CoreService} from "../core/core.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-ligne-telephonique',
@@ -22,6 +23,18 @@ export class LigneTelephoniqueComponent implements OnInit {
     'adresseIp', 'categorie', 'debit', 'ACTIONS'];
 
   dataSource!: MatTableDataSource<any>;
+/*  // Supposons que dataSource soit un Observable<any> dans votre composant
+  dataSource!: Observable<any>;
+  // Créez une variable pour contenir le tableau de données
+  dataList: any[] = [];
+  // Initialisez MatTableDataSource en utilisant le tableau de données
+  matDataSource = new MatTableDataSource<any>(this.dataList);
+  // Abonnez-vous à votre dataSource et mettez à jour le tableau de données
+  this.dataSource.subscribe(data => {
+  this.dataList = data;
+  this.matDataSource.data = data;
+});*/
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -56,15 +69,16 @@ export class LigneTelephoniqueComponent implements OnInit {
 
   formatNumeroLigne(numeroLigne: string): string {
     if (!numeroLigne) return '---';
+
     const cleanedNumber = numeroLigne.replace(/[\s-]/g, '');
-    if (cleanedNumber.length === 10) {
-      return cleanedNumber.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
+
+    if (cleanedNumber.length === 12) {
+      return `(${cleanedNumber.substr(0, 3)}) ${cleanedNumber.substr(3, 3)} ${cleanedNumber.substr(6, 3)} ${cleanedNumber.substr(9, 3)}`;
     }
-    else if (cleanedNumber.length === 12) {
-      return cleanedNumber.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '$1-$2-$3-$4');
-    }
+
     return numeroLigne;
   }
+
 
 
   /*getListLignes(){

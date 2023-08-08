@@ -25,25 +25,10 @@ export class LoginService {
     return this.http.post(environment.backEndHost + "/auth/login", params, options);
   }
 
-/*  login(username: string, password: string): Observable<any> {
-    let options = {
-      headers: new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded")
-    }
-
-    let params = new URLSearchParams();
-    params.set("username", username);
-    params.set("password", password);
-
-    return this.http.post(environment.backEndHost + "/auth/login", params.toString(), options)
-      .pipe(map((response: any) => response));
-  }*/
-
   loadProfile(data: any) {
     this.isAuthenticated = true;
     this.accessToken = data['access-token'];
     let decodeJwt: any = jwtDecode(this.accessToken);
-    console.log("userData---"+decodeJwt);
-
     this.userData = {
       id: decodeJwt.id,
       username: decodeJwt.username,
@@ -51,11 +36,9 @@ export class LoginService {
       password: decodeJwt.password,
       role: decodeJwt.role,
     };
-    //console.log("userData --- " + JSON.stringify(this.userData, null, 2));
   }
 
   logout() {
-    console.log("userData---"+this.userData);
     this.isAuthenticated = false;
     this.accessToken = undefined;
     this.userData = undefined;

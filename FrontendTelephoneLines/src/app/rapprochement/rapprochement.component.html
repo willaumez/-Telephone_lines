@@ -1,0 +1,29 @@
+<div class="main-body">
+  <div class="row"><h1 class="titre">Rapprochement</h1></div>
+  <div class="container-fluid">
+
+    <!--<label for="file" class="label-file">Importer un fichier</label>
+    <input type="file" id="file" class="input-file" accept=".xlsx" (change)="getFile($event)" />-->
+    <div class="center-container">
+      <form (ngSubmit)="onFormSubmit()">
+        <button mat-raised-button type="button" class="btn label-file" (click)="fileInput.click()">Importer un fichier excel</button>
+        <input type="file" id="file" class="input-file" accept=".xlsx" (change)="getFile($event)" #fileInput style="display: none"/>
+        <div class="file-drop-area"
+             (dragover)="onFileDragOver($event); preventDefault($event)"
+             (dragleave)="onFileDragLeave($event)"
+             (drop)="onFileDrop($event); preventDefault($event)">
+          <p class="drag-text">--- Glissez et déposez un fichier excel ici ---</p>
+        </div>
+        <button mat-raised-button type="submit" class="submit-button">Importer ?</button>
+      </form>
+    </div>
+
+    <div *ngIf="selectedFile" class="file-info">
+      <p><strong>Nom du fichier:</strong> {{ selectedFile.name }}</p>
+      <p><strong>Type:</strong> {{ selectedFile.type }}</p>
+      <p><strong>Taille:</strong> {{ selectedFile.size }}</p>
+    </div>
+  </div>
+
+
+</div>

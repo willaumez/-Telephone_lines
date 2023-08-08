@@ -7,6 +7,7 @@ import {NotAuthorizedComponent} from "./not-authorized/not-authorized.component"
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
 import {UtilisateursComponent} from "./utilisateurs/utilisateurs.component";
 import {ProfilComponent} from "./profil/profil.component";
+import {RapprochementComponent} from "./rapprochement/rapprochement.component";
 
 const routes: Routes = [
 
@@ -25,6 +26,7 @@ const routes: Routes = [
         },
         {path: 'users', component: UtilisateursComponent},
         {path: 'profile', component: ProfilComponent},
+        {path: 'rapprochement', component: RapprochementComponent},
         {path: 'notAuthorized', component: NotAuthorizedComponent},
       ],
     },

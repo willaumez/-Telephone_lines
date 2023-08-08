@@ -49,6 +49,10 @@ export class ProfilComponent implements OnInit {
   showChangePassword() {
     this.showPasswordEdit = !this.showPasswordEdit;
   }
+  handleReset(): void{
+    this.showPasswordEdit = false;
+    this.passwordConfirmed = false;
+  }
 
   // Fonction de validation personnalisée pour vérifier l'égalité des mots de passe
   private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -121,8 +125,11 @@ export class ProfilComponent implements OnInit {
     }
     if (this.showPasswordEdit && this.passwordConfirmed) {
       if (this.userForm.valid) {
+        //let conf = confirm("Modifier le mot de passe exigera une reconnection!  Es-tu sure?  ")
+        //if (!conf) return;
         let user: User = this.userForm.value;
-        this._userService.saveUser(user).subscribe({
+        console.log("User----  ", user);
+        this._userService.updateUser(user).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar('Mot de pass modifié avec succès !');
             this.passwordConfirmed = false;
