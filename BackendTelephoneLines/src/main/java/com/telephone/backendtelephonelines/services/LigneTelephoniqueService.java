@@ -26,6 +26,8 @@ public interface LigneTelephoniqueService {
 
     LigneTelephoniqueDTO getLigneTelephonique(Long id) throws LigneTelephoniqueNotFoundException;
 
+
+
     List<LigneTelephoniqueDTO> ligneTelephoniqueList();
 
     List<LigneTelephoniqueDTO> searchLigneTelephonique(String keyword);
@@ -46,5 +48,10 @@ public interface LigneTelephoniqueService {
     User getUserByUsername(String username);
 
     boolean confirmPassword(Long id, String password) throws UserNotFoundException ;
+
+
+    //Rapprochement
+    List<Rapprochement> rapprochementList();
+
 }
 

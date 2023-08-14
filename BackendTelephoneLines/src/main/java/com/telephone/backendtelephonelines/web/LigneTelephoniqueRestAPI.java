@@ -93,4 +93,10 @@ public class LigneTelephoniqueRestAPI {
         return ligneTelephoniqueService.getTypeLigneTelephonique(typeLigne);
     }
 
+    //====================  get Rapprochement  ======================//
+    @GetMapping("/rapprochement")
+    public List<Rapprochement> rapprochementList() {
+        return ligneTelephoniqueService.rapprochementList();
+    }
+
 }

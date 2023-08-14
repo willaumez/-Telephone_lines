@@ -36,13 +36,14 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LigneTelephoniqueComponent} from "./ligne-telephonique/ligne-telephonique.component";
-import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
-import { UserAddEditComponent } from './utilisateurs/user-add-edit/user-add-edit.component';
+import {UtilisateursComponent} from './utilisateurs/utilisateurs.component';
+import {UserAddEditComponent} from './utilisateurs/user-add-edit/user-add-edit.component';
 import {MatChipsModule} from "@angular/material/chips";
-import { ProfilComponent } from './profil/profil.component';
+import {ProfilComponent} from './profil/profil.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { RapprochementComponent } from './rapprochement/rapprochement.component';
+import {RapprochementComponent} from './rapprochement/rapprochement.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { RapprochementComponent } from './rapprochement/rapprochement.component'
     MatSnackBarModule,
     MatChipsModule,
     MatGridListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true}

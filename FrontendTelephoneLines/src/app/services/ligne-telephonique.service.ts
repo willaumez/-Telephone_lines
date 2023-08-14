@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {LigneTelephoniqueDTO} from "../Models/LigneTelephoniqueDTO";
+import {Rapprochement} from "../Models/Rapprochement";
 
 @Injectable({
   providedIn: 'root'
@@ -64,4 +65,7 @@ export class LigneTelephoniqueService {
   }
 
 
+  getLignesRapprochement() {
+    return this.http.get<Array<Rapprochement>>(environment.backEndHost+"/rapprochement");
+  }
 }

@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -125,6 +124,7 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
             return dtoMapper.fromFixVpnAdslVpnLL(fixVpnAdslVpnLL);
         }
     }
+
 
     @Override
     public List<LigneTelephoniqueDTO> ligneTelephoniqueList() {
@@ -262,6 +262,20 @@ public class LigneTelephoniqueServiceImpl implements LigneTelephoniqueService {
 
         return passwordEncoder.matches(password, passwordUser);
     }
+
+
+    //Rapprochement
+    @Override
+    public List<Rapprochement> rapprochementList() {
+        List<LigneTelephonique> ligneTelephoniques = ligneTelephoniqueRepository.findAll();
+        return ligneTelephoniques.stream().map(ligneTelephonique -> {
+            Rapprochement rapprochement = new Rapprochement();
+            rapprochement.setNumero(ligneTelephonique.getNumeroLigne());
+            rapprochement.setMontant(ligneTelephonique.getMontant());
+            return rapprochement;
+        }).collect(Collectors.toList());
+    }
+
 
 }
 
