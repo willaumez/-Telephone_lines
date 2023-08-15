@@ -1,9 +1,10 @@
 <div class="main-body">
   <div class="row">
     <h1 class="titre">Rapprochement</h1>
-    <button mat-raised-button class="anulbtn" color="primary" *ngIf="selectedFile" (click)="resetPage()">ANNULER</button>
+    <button mat-raised-button class="anulbtn" *ngIf="selectedFile" (click)="resetPage()">ANNULER
+    </button>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid row">
     <div class="center-container" *ngIf="dataFromExcel.length === 0">
       <form>
         <button mat-raised-button type="button" color="primary" class="btn label-file" (click)="fileInput.click()">
@@ -33,73 +34,203 @@
         </div>
       </form>
     </div>
+  </div>
+  <div class="row" *ngIf="dataFromExcel.length > 0">
+    <div class="container-table">
+      <h2>Fichier Excel :</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
 
+      <div class="container">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="dataSource?.data">Total: {{ dataSource.data.length }}</div>
+      </div>
+    </div>
+    <div class="container-table">
+      <h2>Base des données :</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-table [dataSource]="dataBase" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="dataBase?.data">Total: {{ dataBase.data.length }}</div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button class="anulbtn" color="primary" *ngIf="dataFromExcel.length > 0" (click)="traitementBtn()">TRAITEMENT</button>
+  <mat-divider></mat-divider>
+
+
+  <div class="row">
+    <div class="container-table" *ngIf="tableCorresponding">
+      <h2>Donnés Correspondant</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-table [dataSource]="tableCorresponding" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="tableCorresponding?.data">Total: {{ tableCorresponding.data.length }}</div>
+      </div>
+    </div>
+    <div class="container-table" *ngIf="tableMontantNoCor">
+      <h2>Donnés Montant Non-Correspondant</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-table [dataSource]="tableMontantNoCor" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row" style="color: red">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="tableMontantNoCor?.data">Total: {{ tableMontantNoCor.data.length }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container-table" *ngIf="tableCorresponding">
+      <h2>Donnés Inexistant dans la Base de Données</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-table [dataSource]="tableNoExistDB" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="tableNoExistDB?.data">Total: {{ tableNoExistDB.data.length }}</div>
+      </div>
+    </div>
+    <div class="container-table" *ngIf="tableMontantNoCor">
+      <h2>Donnés Inexistant dans le fichier Excel</h2>
+      <div class="container-fluid">
+        <mat-form-field class="filter" appearance="fill">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-table [dataSource]="tableNoExistExcel" class="mat-elevation-z8 mat-table-auto-width" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+            <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
+          </ng-container>
+          <!-- Type Column -->
+          <ng-container matColumnDef="montant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+            <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
+          </tr>
+        </mat-table>
+        <div class="customer-total" *ngIf="tableNoExistExcel?.data">Total: {{ tableNoExistExcel.data.length }}</div>
+      </div>
+    </div>
   </div>
 
-  <div class="container-table" *ngIf="dataFromExcel.length > 0">
-    <h2>Fichier Excel :</h2>
-    <div class="container-fluid">
-      <mat-form-field class="filter" appearance="fill">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
-      </mat-form-field>
-    </div>
-
-    <div class="container">
-      <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table-auto-width" matSort>
-        <!-- ID Column -->
-        <ng-container matColumnDef="numero">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
-          <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
-        </ng-container>
-        <!-- Type Column -->
-        <ng-container matColumnDef="montant">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
-          <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
-        </tr>
-      </mat-table>
-      <div class="customer-total" *ngIf="dataSource?.data">Total: {{ dataSource.data.length }}</div>
-    </div>
-  </div>
-
-  <div class="container-table" *ngIf="dataFromExcel.length > 0">
-    <h2>Base des données :</h2>
-    <div class="container-fluid">
-      <mat-form-field class="filter" appearance="fill">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 212**********" #input>
-      </mat-form-field>
-    </div>
-
-    <div class="container">
-      <mat-table [dataSource]="dataBase" class="mat-elevation-z8 mat-table-auto-width" matSort>
-        <!-- ID Column -->
-        <ng-container matColumnDef="numero">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
-          <td mat-cell *matCellDef="let row">{{ row.numero }}</td>
-        </ng-container>
-        <!-- Type Column -->
-        <ng-container matColumnDef="montant">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
-          <td mat-cell *matCellDef="let row">{{ row.montant }}</td>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="2">Aucune donnée pour le filtre "{{ input.value }}"</td>
-        </tr>
-      </mat-table>
-      <div class="customer-total" *ngIf="dataBase?.data">Total: {{ dataBase.data.length }}</div>
-    </div>
-  </div>
 
 
-  </div>
+
+
+</div>
 
 
 
